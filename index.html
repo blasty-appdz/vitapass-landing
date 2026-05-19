@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VitaPass — Carnet de santé digital algérien</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080E1E;--bg2:#0D1526;--bg3:#111C2E;
+  --g:#00C98D;--g2:#00F0AA;--g3:rgba(0,201,141,0.12);
+  --blue:#4D9FEC;--yellow:#FFD166;--red:#FF5A5A;
+  --white:#EFF3FF;--dim:#5A6A85;--dim2:#8A9AB5;
+  --border:rgba(0,201,141,0.18);--border2:rgba(255,255,255,0.07);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border2);background:rgba(8,14,30,0.9);backdrop-filter:blur(20px)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--white)}
+.logo-text span{color:var(--g)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-link{font-size:14px;color:var(--dim2);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--g)}
+.nav-cta{background:var(--g);color:#001A12;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:10px 24px;border-radius:8px;text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--g2)}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(0,201,141,0.07) 0%,transparent 65%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,201,141,0.08);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:11px;font-family:'Syne',sans-serif;font-weight:700;color:var(--g);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:36px}
+.dot{width:6px;height:6px;background:var(--g);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+h1{font-family:'Syne',sans-serif;font-size:clamp(44px,6vw,84px);font-weight:800;line-height:1.05;max-width:880px;margin-bottom:24px}
+h1 .green{color:var(--g)}
+.hero-sub{font-size:18px;color:var(--dim2);max-width:540px;line-height:1.75;margin-bottom:48px}
+.btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn-p{background:var(--g);color:#001A12;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;padding:16px 40px;border-radius:10px;text-decoration:none;transition:all .2s}
+.btn-p:hover{background:var(--g2);transform:translateY(-2px)}
+.btn-s{background:transparent;color:var(--white);font-family:'Syne',sans-serif;font-size:15px;font-weight:600;padding:16px 36px;border-radius:10px;text-decoration:none;border:1px solid var(--border2);transition:all .2s}
+.btn-s:hover{border-color:var(--g);color:var(--g)}
+.hero-stats{display:flex;gap:56px;margin-top:80px;padding-top:48px;border-top:1px solid var(--border2);flex-wrap:wrap;justify-content:center}
+.stat-num{font-family:'Syne',sans-serif;font-size:38px;font-weight:800;color:var(--g);line-height:1}
+.stat-label{font-size:13px;color:var(--dim2);margin-top:6px}
+
+.mockup-wrap{display:flex;justify-content:center;padding:40px 40px 80px}
+.phone{width:260px;background:var(--bg2);border-radius:32px;border:1px solid rgba(0,201,141,0.15);overflow:hidden;padding:20px 14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 32px 64px rgba(0,0,0,0.5),0 0 0 1px rgba(0,201,141,0.06)}
+.vcard{background:linear-gradient(135deg,#003D2A,#001A12);border:1px solid rgba(0,201,141,0.2);border-radius:14px;padding:14px}
+.vcard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.vcard-logo{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--g)}
+.vcard-b{background:rgba(255,90,90,0.15);color:#FF8A8A;font-size:9px;font-weight:700;padding:2px 7px;border-radius:8px;border:1px solid rgba(255,90,90,0.2)}
+.vcard-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--white)}
+.vcard-info{font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px}
+.vcard-id{font-size:8px;color:rgba(0,201,141,0.35);letter-spacing:1px;margin-top:8px}
+.pstats{display:flex;gap:6px}
+.pstat{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:8px 6px;text-align:center}
+.pstat-v{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--white)}
+.pstat-l{font-size:8px;color:var(--dim);margin-top:1px}
+.prow{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 10px;display:flex;align-items:center;gap:8px}
+.prow-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.prow-t{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--white)}
+.prow-s{font-size:9px;color:var(--dim);margin-top:1px}
+.arr{font-size:12px;color:var(--dim);margin-left:auto}
+
+section{padding:100px 40px;max-width:1200px;margin:0 auto}
+.sec-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,201,141,0.08);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:11px;font-family:'Syne',sans-serif;font-weight:700;color:var(--g);letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+.green-line{width:48px;height:2px;background:var(--g);margin-bottom:20px}
+h2{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,52px);font-weight:800;line-height:1.1;margin-bottom:60px}
+h2 .green{color:var(--g)}
+
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border2);border-radius:16px;overflow:hidden;border:1px solid var(--border2)}
+.feat{background:var(--bg2);padding:32px 28px;transition:background .2s}
+.feat:hover{background:var(--bg3)}
+.feat-ico{width:46px;height:46px;background:rgba(0,201,141,0.07);border:1px solid rgba(0,201,141,0.15);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px}
+.feat-t{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:10px}
+.feat-d{font-size:14px;color:var(--dim2);line-height:1.7}
+
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.who-card{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;padding:44px 36px;position:relative;overflow:hidden;transition:border-color .3s}
+.who-card:hover{border-color:rgba(0,201,141,0.25)}
+.who-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);opacity:0;transition:opacity .3s}
+.who-card:hover::after{opacity:1}
+.who-emoji{font-size:44px;margin-bottom:20px;display:block}
+.who-t{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--white);margin-bottom:18px}
+.who-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.who-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--dim2);line-height:1.5}
+.who-list li::before{content:'✦';color:var(--g);font-size:9px;margin-top:4px;flex-shrink:0}
+
+.sec-full{padding:100px 40px;background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.sec-full-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.sec-items{display:flex;flex-direction:column;gap:10px}
+.sec-item{background:var(--bg3);border:1px solid var(--border2);border-radius:11px;padding:14px 18px;display:flex;align-items:center;gap:12px}
+.si-ico{width:38px;height:38px;background:rgba(0,201,141,0.07);border:1px solid rgba(0,201,141,0.15);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.si-t{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--white)}
+.si-s{font-size:11px;color:var(--dim2);margin-top:2px}
+.si-badge{margin-left:auto;background:rgba(0,201,141,0.1);color:var(--g);font-size:10px;font-family:'Syne',sans-serif;font-weight:700;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,201,141,0.2);white-space:nowrap}
+
+.cta-sec{padding:120px 40px;text-align:center;position:relative}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,201,141,0.05),transparent 70%);pointer-events:none}
+.cta-sec h2{font-size:clamp(36px,5vw,64px);margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto}
+.cta-sub{font-size:17px;color:var(--dim2);max-width:480px;margin:0 auto 44px;line-height:1.7}
+.cta-note{font-size:12px;color:var(--dim);margin-top:18px}
+
+footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.ft-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--white)}
+.ft-logo span{color:var(--g)}
+.ft-links{display:flex;gap:24px}
+.ft-link{font-size:13px;color:var(--dim2);text-decoration:none;transition:color .2s}
+.ft-link:hover{color:var(--g)}
+.ft-copy{font-size:12px;color:var(--dim)}
+
+@media(max-width:768px){
+  nav{padding:16px 20px}.nav-links{display:none}
+  .hero{padding:100px 20px 60px}.hero-stats{gap:28px}
+  section{padding:60px 20px}
+  .who-grid{grid-template-columns:1fr}
+  .sec-full-inner{grid-template-columns:1fr;gap:40px}
+  .sec-full{padding:60px 20px}
+  .cta-sec{padding:80px 20px}
+  footer{padding:28px 20px;flex-direction:column;text-align:center}.ft-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="19" fill="rgba(0,201,141,0.08)" stroke="rgba(0,201,141,0.25)" stroke-width="1"/>
+      <path d="M20 32C17 29 9 24 9 17c0-4 3-7 6.5-7 2 0 3.8 1.2 4.5 3 .7-1.8 2.5-3 4.5-3C28 10 31 13 31 17c0 7-9 12-11 15Z" fill="url(#g)"/>
+      <defs><linearGradient id="g" x1="9" y1="10" x2="31" y2="32"><stop stop-color="#00C98D"/><stop offset="1" stop-color="#005E42"/></linearGradient></defs>
+    </svg>
+    <span class="logo-text">Vita<span>Pass</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">Fonctionnalités</a>
+    <a href="#for-who" class="nav-link">Pour qui ?</a>
+    <a href="#security" class="nav-link">Sécurité</a>
+    <a href="https://vitapass.app" class="nav-cta">Accéder à l'app →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="badge"><span class="dot"></span>Disponible maintenant · Gratuit</div>
+  <h1>Votre santé,<br/><span class="green">toujours avec vous</span></h1>
+  <p class="hero-sub">VitaPass centralise tout votre dossier médical dans une application sécurisée, accessible en un scan QR — même en urgence.</p>
+  <div class="btns">
+    <a href="https://vitapass.app" class="btn-p">Créer mon dossier gratuit</a>
+    <a href="#features" class="btn-s">Découvrir →</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">100%</div><div class="stat-label">Gratuit pour toujours</div></div>
+    <div><div class="stat-num">🔒</div><div class="stat-label">Chiffré & sécurisé</div></div>
+    <div><div class="stat-num">DZ</div><div class="stat-label">Made in Algeria 🇩🇿</div></div>
+  </div>
+</div>
+
+<div class="mockup-wrap">
+  <div class="phone">
+    <div style="font-family:'Syne',sans-serif;font-size:10px;color:rgba(0,201,141,0.4);letter-spacing:1px">VitaPass · Accueil</div>
+    <div class="vcard">
+      <div class="vcard-top"><span class="vcard-logo">🏥 VitaPass</span><span class="vcard-b">O+</span></div>
+      <div class="vcard-name">Ahmed Bensalem</div>
+      <div class="vcard-info">Oran · CNAS-DZ-00134</div>
+      <div class="vcard-id">VP-DZ-3A8F91B2</div>
+    </div>
+    <div class="pstats">
+      <div class="pstat"><div class="pstat-v">3</div><div class="pstat-l">Médic.</div></div>
+      <div class="pstat"><div class="pstat-v">2</div><div class="pstat-l">Médecins</div></div>
+      <div class="pstat"><div class="pstat-v">7.1</div><div class="pstat-l">HbA1c</div></div>
+    </div>
+    <div class="prow"><div class="prow-ico" style="background:rgba(255,90,90,0.1)">🆘</div><div><div class="prow-t">QR Pass Urgence</div><div class="prow-s">Infos vitales instantanées</div></div><span class="arr">›</span></div>
+    <div class="prow"><div class="prow-ico" style="background:rgba(77,159,236,0.1)">📋</div><div><div class="prow-t">Mon Dossier</div><div class="prow-s">Médicaments, vaccins...</div></div><span class="arr">›</span></div>
+    <div class="prow"><div class="prow-ico" style="background:rgba(0,201,141,0.1)">❤️</div><div><div class="prow-t">Mon Suivi</div><div class="prow-s">Glycémie, tension</div></div><span class="arr">›</span></div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="green-line"></div>
+  <div class="sec-badge">Fonctionnalités</div>
+  <h2>Tout ce dont vous <span class="green">avez besoin</span></h2>
+  <div class="feat-grid">
+    <div class="feat"><div class="feat-ico">🆘</div><div class="feat-t">QR Pass Urgence</div><p class="feat-d">Un QR code unique contenant vos informations vitales — groupe sanguin, allergies, contact d'urgence — accessible instantanément par les secours.</p></div>
+    <div class="feat"><div class="feat-ico">📋</div><div class="feat-t">Dossier médical complet</div><p class="feat-d">Médicaments, antécédents, allergies, vaccins, documents médicaux — tout en un seul endroit, organisé et sécurisé.</p></div>
+    <div class="feat"><div class="feat-ico">📊</div><div class="feat-t">Suivi santé personnalisé</div><p class="feat-d">Surveillez votre glycémie, tension artérielle et poids avec des graphiques clairs. Idéal pour les patients diabétiques ou hypertendus.</p></div>
+    <div class="feat"><div class="feat-ico">👨‍⚕️</div><div class="feat-t">Accès médecin sécurisé</div><p class="feat-d">Autorisez vos médecins à consulter votre dossier en un clic. Vous gardez le contrôle total — révoquez l'accès à tout moment.</p></div>
+    <div class="feat"><div class="feat-ico">📄</div><div class="feat-t">Documents médicaux</div><p class="feat-d">Stockez vos ordonnances, analyses, radios et comptes rendus. Fini les papiers perdus — tout est dans votre poche.</p></div>
+    <div class="feat"><div class="feat-ico">📱</div><div class="feat-t">Application mobile PWA</div><p class="feat-d">Installez VitaPass sur votre téléphone comme une vraie app — iOS et Android — sans passer par un store.</p></div>
+  </div>
+</section>
+
+<section id="for-who" style="max-width:1200px">
+  <div class="green-line"></div>
+  <div class="sec-badge">Pour qui ?</div>
+  <h2>Conçu pour <span class="green">tous</span></h2>
+  <div class="who-grid">
+    <div class="who-card">
+      <span class="who-emoji">🧑‍💼</span>
+      <div class="who-t">Patients</div>
+      <ul class="who-list">
+        <li>Centralisez tout votre historique médical</li>
+        <li>Partagez vos infos en urgence via QR code</li>
+        <li>Suivez vos constantes au quotidien</li>
+        <li>Ne perdez plus jamais une ordonnance</li>
+        <li>Gérez vos médecins autorisés</li>
+      </ul>
+    </div>
+    <div class="who-card">
+      <span class="who-emoji">👨‍⚕️</span>
+      <div class="who-t">Médecins</div>
+      <ul class="who-list">
+        <li>Accédez au dossier complet de vos patients</li>
+        <li>Historique médicaments et antécédents instantané</li>
+        <li>Profil validé par l'équipe VitaPass</li>
+        <li>Interface dédiée et optimisée</li>
+        <li>Accès sécurisé et révocable par le patient</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="sec-full" id="security">
+  <div class="sec-full-inner">
+    <div>
+      <div class="green-line"></div>
+      <div class="sec-badge">Sécurité</div>
+      <h2 style="margin-bottom:16px">Vos données,<br/><span class="green">protégées</span></h2>
+      <p style="font-size:15px;color:var(--dim2);line-height:1.8">VitaPass est construit sur une infrastructure de niveau entreprise. Vos données médicales ne sont jamais partagées sans votre accord explicite.</p>
+    </div>
+    <div class="sec-items">
+      <div class="sec-item"><div class="si-ico">🔐</div><div><div class="si-t">Chiffrement bout en bout</div><div class="si-s">TLS 1.3 + chiffrement au repos</div></div><span class="si-badge">Actif</span></div>
+      <div class="sec-item"><div class="si-ico">🛡️</div><div><div class="si-t">Row Level Security</div><div class="si-s">Vos données = vos données uniquement</div></div><span class="si-badge">Actif</span></div>
+      <div class="sec-item"><div class="si-ico">✅</div><div><div class="si-t">Validation médecins</div><div class="si-s">Chaque médecin est vérifié manuellement</div></div><span class="si-badge">Actif</span></div>
+      <div class="sec-item"><div class="si-ico">🔑</div><div><div class="si-t">Contrôle d'accès total</div><div class="si-s">Vous choisissez qui voit quoi</div></div><span class="si-badge">Actif</span></div>
+      <div class="sec-item"><div class="si-ico">☁️</div><div><div class="si-t">Infrastructure Supabase</div><div class="si-s">Serveurs certifiés SOC 2 Type II</div></div><span class="si-badge">Actif</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-sec">
+  <div class="green-line" style="margin:0 auto 20px"></div>
+  <h2>Prêt à prendre soin<br/>de votre <span class="green">santé ?</span></h2>
+  <p class="cta-sub">Rejoignez les Algériens qui font confiance à VitaPass pour gérer leur santé au quotidien.</p>
+  <div class="btns">
+    <a href="https://vitapass.app" class="btn-p">Créer mon compte gratuit →</a>
+    <a href="mailto:contact@vitapass.app" class="btn-s">Nous contacter</a>
+  </div>
+  <p class="cta-note">Gratuit · Sans publicité · 100% algérien 🇩🇿</p>
+</div>
+
+<footer>
+  <div class="ft-logo">Vita<span>Pass</span></div>
+  <div class="ft-links">
+    <a href="https://vitapass.app" class="ft-link">Application</a>
+    <a href="mailto:contact@vitapass.app" class="ft-link">Contact</a>
+    <a href="https://admin.vitapass.app" class="ft-link">Admin</a>
+  </div>
+  <div class="ft-copy">© 2026 VitaPass · Algérie 🇩🇿</div>
+</footer>
+
+</body>
+</html>
