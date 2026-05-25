@@ -96,6 +96,31 @@ h2 .green{color:var(--g)}
 .si-s{font-size:11px;color:var(--dim2);margin-top:2px}
 .si-badge{margin-left:auto;background:rgba(0,201,141,0.1);color:var(--g);font-size:10px;font-family:'Syne',sans-serif;font-weight:700;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,201,141,0.2);white-space:nowrap}
 
+/* ===== NOUVELLE SECTION : 3 ARGUMENTS CLÉS ===== */
+.why-sec{padding:100px 40px;max-width:1200px;margin:0 auto}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:0}
+.why-card{position:relative;background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:40px 32px;overflow:hidden;transition:border-color .3s,transform .3s}
+.why-card:hover{border-color:rgba(0,201,141,0.3);transform:translateY(-4px)}
+.why-card::before{content:'';position:absolute;inset:0;border-radius:20px;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,201,141,0.06),transparent 70%);pointer-events:none}
+.why-card-num{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:rgba(0,201,141,0.35);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+.why-icon-wrap{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px;position:relative}
+.why-icon-wrap.green-ico{background:rgba(0,201,141,0.08);border:1px solid rgba(0,201,141,0.2)}
+.why-icon-wrap.blue-ico{background:rgba(77,159,236,0.08);border:1px solid rgba(77,159,236,0.2)}
+.why-icon-wrap.yellow-ico{background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.2)}
+.why-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--white);margin-bottom:12px;line-height:1.2}
+.why-desc{font-size:14px;color:var(--dim2);line-height:1.75;margin-bottom:20px}
+.why-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11px;font-family:'Syne',sans-serif;font-weight:700;letter-spacing:.5px}
+.why-pill.green-pill{background:rgba(0,201,141,0.1);color:var(--g);border:1px solid rgba(0,201,141,0.2)}
+.why-pill.blue-pill{background:rgba(77,159,236,0.1);color:#7DBEFF;border:1px solid rgba(77,159,236,0.2)}
+.why-pill.yellow-pill{background:rgba(255,209,102,0.1);color:#FFD166;border:1px solid rgba(255,209,102,0.2)}
+.why-pill-dot{width:5px;height:5px;border-radius:50%}
+.why-pill.green-pill .why-pill-dot{background:var(--g)}
+.why-pill.blue-pill .why-pill-dot{background:#7DBEFF}
+.why-pill.yellow-pill .why-pill-dot{background:#FFD166}
+
+/* Bande séparatrice gradient */
+.divider-glow{height:1px;background:linear-gradient(90deg,transparent,rgba(0,201,141,0.25),transparent);margin:0 40px}
+
 .cta-sec{padding:120px 40px;text-align:center;position:relative}
 .cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,201,141,0.05),transparent 70%);pointer-events:none}
 .cta-sec h2{font-size:clamp(36px,5vw,64px);margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto}
@@ -117,8 +142,11 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
   .who-grid{grid-template-columns:1fr}
   .sec-full-inner{grid-template-columns:1fr;gap:40px}
   .sec-full{padding:60px 20px}
+  .why-sec{padding:60px 20px}
+  .why-grid{grid-template-columns:1fr;gap:16px}
   .cta-sec{padding:80px 20px}
   footer{padding:28px 20px;flex-direction:column;text-align:center}.ft-links{justify-content:center}
+  .divider-glow{margin:0 20px}
 }
 </style>
 </head>
@@ -237,6 +265,51 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
     </div>
   </div>
 </div>
+
+<!-- ===== NOUVELLE SECTION : POURQUOI VITAPASS ===== -->
+<div class="divider-glow"></div>
+
+<section class="why-sec" id="why">
+  <div style="text-align:center;margin-bottom:60px">
+    <div class="green-line" style="margin:0 auto 20px"></div>
+    <div class="sec-badge" style="margin:0 auto 18px">Nouveau</div>
+    <h2 style="margin-bottom:16px">Pourquoi choisir<br/><span class="green">VitaPass maintenant ?</span></h2>
+    <p style="font-size:16px;color:var(--dim2);max-width:520px;margin:0 auto;line-height:1.75">Trois raisons concrètes qui font la différence — pour vous, pour vos proches, pour votre médecin.</p>
+  </div>
+
+  <div class="why-grid">
+
+    <!-- Carte 1 : QR code hors ligne -->
+    <div class="why-card">
+      <div class="why-card-num">01 · Urgence</div>
+      <div class="why-icon-wrap green-ico">📴</div>
+      <div class="why-title">QR code visible<br/>même sans réseau</div>
+      <p class="why-desc">Votre QR Pass Urgence s'affiche instantanément, que vous ayez du réseau ou non. En cas d'accident ou de malaise, les secours scannent et accèdent à vos informations vitales — groupe sanguin, allergies, traitements en cours — sans aucune connexion requise.</p>
+      <div class="why-pill green-pill"><span class="why-pill-dot"></span>100% hors ligne · Toujours disponible</div>
+    </div>
+
+    <!-- Carte 2 : Prise de RDV -->
+    <div class="why-card">
+      <div class="why-card-num">02 · Praticité</div>
+      <div class="why-icon-wrap blue-ico">📅</div>
+      <div class="why-title">Prenez rendez-vous<br/>directement depuis l'app</div>
+      <p class="why-desc">Fini les longues attentes au téléphone. Trouvez un médecin disponible et réservez votre créneau en quelques secondes, directement depuis VitaPass. Votre dossier est automatiquement partagé avec le praticien — il arrive préparé, vous gagnez du temps.</p>
+      <div class="why-pill blue-pill"><span class="why-pill-dot"></span>Réservation instantanée</div>
+    </div>
+
+    <!-- Carte 3 : Activation simple -->
+    <div class="why-card">
+      <div class="why-card-num">03 · Simplicité</div>
+      <div class="why-icon-wrap yellow-ico">⚡</div>
+      <div class="why-title">Un clic pour tout<br/>activer</div>
+      <p class="why-desc">Créez votre compte, remplissez votre dossier une seule fois, et activez votre QR Pass. C'est tout. Dès que quelqu'un scanne votre code, il voit exactement ce que vous avez choisi de partager — rien de plus, rien de moins. Aucune configuration complexe.</p>
+      <div class="why-pill yellow-pill"><span class="why-pill-dot"></span>Prêt en moins de 5 minutes</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider-glow"></div>
 
 <div class="cta-sec">
   <div class="green-line" style="margin:0 auto 20px"></div>
