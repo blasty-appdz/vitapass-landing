@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/urgence/:token", "destination": "https://app.vitapass.app/urgence/:token", "permanent": false },
+    { "source": "/auth/:path*", "destination": "https://app.vitapass.app/auth/:path*", "permanent": false },
+    { "source": "/privacy", "destination": "https://app.vitapass.app/privacy", "permanent": false }
+  ]
+}
