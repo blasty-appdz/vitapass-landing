@@ -8,10 +8,10 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080E1E;--bg2:#0D1526;--bg3:#111C2E;
+  --bg:#060B16;--bg2:#0D1526;--bg3:#111C2E;
   --g:#00C98D;--g2:#00F0AA;
   --blue:#4D9FEC;--yellow:#FFD166;
-  --white:#EFF3FF;--dim:#5A6A85;--dim2:#8A9AB5;
+  --white:#F2F5FC;--dim:#7C89A4;--dim2:#A3AEC6;
   --border:rgba(0,201,141,0.18);--border2:rgba(255,255,255,0.07);
 }
 html{scroll-behavior:smooth}
@@ -148,6 +148,29 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
   footer{padding:28px 20px;flex-direction:column;text-align:center}.ft-links{justify-content:center}
   .divider-glow{margin:0 20px}
 }
+/* Icônes v2 */
+.why-icon-wrap{color:var(--g)}.why-icon-wrap.blue-ico{color:var(--blue)}.why-icon-wrap.yellow-ico{color:var(--yellow)}
+.why-icon-wrap svg{width:26px;height:26px}
+.feat-ico,.si-ico{color:var(--g)}
+.si-ico svg{width:19px;height:19px}
+/* Écran d'ouverture : le logo apparaît en premier */
+#vp-intro{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(60% 45% at 50% 45%,rgba(0,201,141,.16),transparent 70%),#060B16;transition:opacity .45s ease,visibility .45s;cursor:pointer}
+#vp-intro.out{opacity:0;visibility:hidden}
+#vp-intro .ring{width:112px;height:112px;position:relative}
+#vp-intro svg{width:112px;height:112px;overflow:visible}
+#vp-intro .c1{stroke:#00C98D;stroke-width:1.6;fill:none;stroke-dasharray:330;stroke-dashoffset:330;animation:vpDraw 1s cubic-bezier(.65,0,.35,1) .1s forwards;opacity:.7}
+#vp-intro .c2{fill:#0A1628;opacity:0;animation:vpIn .5s ease .35s forwards}
+#vp-intro .hrt{opacity:0;transform-origin:55px 60px;transform:scale(.6);animation:vpHeart .6s cubic-bezier(.2,1.4,.4,1) .55s forwards,vpBeat 1.3s ease-in-out 1.2s infinite}
+#vp-intro .glow{position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,rgba(0,201,141,.28),transparent 65%);opacity:0;animation:vpIn .8s ease .6s forwards}
+#vp-intro .name{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;color:#F2F5FC;letter-spacing:-.5px;opacity:0;transform:translateY(8px);animation:vpUp .55s ease .75s forwards}
+#vp-intro .name span{color:#00C98D}
+#vp-intro .tag{font-size:14px;color:#8C98B3;opacity:0;transform:translateY(8px);animation:vpUp .55s ease .9s forwards}
+@keyframes vpDraw{to{stroke-dashoffset:0}}
+@keyframes vpIn{to{opacity:1}}
+@keyframes vpHeart{to{opacity:1;transform:scale(1)}}
+@keyframes vpBeat{0%,100%{transform:scale(1)}15%{transform:scale(1.08)}30%{transform:scale(1)}45%{transform:scale(1.05)}}
+@keyframes vpUp{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#vp-intro *{animation-duration:.01s!important;animation-delay:0s!important}}
 /* Bandeau responsive */
 .nav-cta-short{display:none}
 @media(max-width:1000px){.nav-links{display:none}}
@@ -163,6 +186,19 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
 </style>
 </head>
 <body>
+<div id="vp-intro" aria-hidden="true">
+  <div class="ring"><div class="glow"></div>
+    <svg viewBox="0 0 110 110"><circle class="c1" cx="55" cy="55" r="52" transform="rotate(-90 55 55)"/><circle class="c2" cx="55" cy="55" r="44"/><path class="hrt" d="M55 82C48 76 30 66 30 51c0-8 6-14 13-14 4.5 0 8.5 2.5 12 6.5 3.5-4 7.5-6.5 12-6.5 7 0 13 6 13 14 0 15-17 25-25 31Z" fill="url(#vpig)"/><defs><linearGradient id="vpig" x1="30" y1="37" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#00E09E"/><stop offset="1" stop-color="#00805A"/></linearGradient></defs></svg>
+  </div>
+  <div class="name">Vita<span>Pass</span></div>
+  <div class="tag">Votre santé, toujours avec vous</div>
+</div>
+<script>
+(function(){var el=document.getElementById('vp-intro');var seen=false;try{seen=sessionStorage.getItem('vp-intro')==='1'}catch(e){}
+if(seen){el.remove();return}try{sessionStorage.setItem('vp-intro','1')}catch(e){}
+var done=false;function hide(){if(done)return;done=true;el.classList.add('out');setTimeout(function(){el.remove()},500)}
+el.addEventListener('click',hide);setTimeout(hide,1900)})();
+</script>
 
 <nav>
   <a href="#" class="logo">
@@ -215,21 +251,21 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
   <div class="why-grid">
     <div class="why-card">
       <div class="why-card-num"><span data-fr="01 · Urgence" data-ar="٠١ · طوارئ">01 · Urgence</span></div>
-      <div class="why-icon-wrap green-ico">📴</div>
+      <div class="why-icon-wrap green-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01M8.5 16.4a5 5 0 0 1 7 0M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8a15 15 0 0 0-11.3-3.8M5 12.9a10 10 0 0 1 5.2-2.8M19 12.9a10 10 0 0 0-2.3-1.7M2 2l20 20"/></svg></div>
       <div class="why-title" data-fr="QR code visible même sans réseau" data-ar="رمز QR مرئي حتى بدون إنترنت">QR code visible<br/>même sans réseau</div>
       <p class="why-desc" data-fr="Votre QR Pass Urgence s'affiche instantanément, que vous ayez du réseau ou non. En cas d'accident ou de malaise, les secours scannent et accèdent à vos informations vitales — groupe sanguin, allergies, traitements en cours — sans aucune connexion requise." data-ar="تظهر بطاقة طوارئ QR Pass على الفور سواء كان لديك إنترنت أم لا. في حالة حادث أو إغماء، يمسح المسعفون الرمز ويصلون إلى معلوماتك الحيوية — فصيلة الدم، الحساسيات، العلاجات الجارية — دون الحاجة لأي اتصال.">Votre QR Pass Urgence s'affiche instantanément, que vous ayez du réseau ou non. En cas d'accident ou de malaise, les secours scannent et accèdent à vos informations vitales — groupe sanguin, allergies, traitements en cours — sans aucune connexion requise.</p>
       <div class="why-pill green-pill"><span class="why-pill-dot"></span><span data-fr="100% hors ligne · Toujours disponible" data-ar="١٠٠٪ بدون إنترنت · دائماً متاح">100% hors ligne · Toujours disponible</span></div>
     </div>
     <div class="why-card">
       <div class="why-card-num"><span data-fr="02 · Praticité" data-ar="٠٢ · سهولة">02 · Praticité</span></div>
-      <div class="why-icon-wrap blue-ico">📅</div>
+      <div class="why-icon-wrap blue-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
       <div class="why-title" data-fr="Prenez rendez-vous directement depuis l'app" data-ar="احجز موعدك مباشرة من التطبيق">Prenez rendez-vous<br/>directement depuis l'app</div>
       <p class="why-desc" data-fr="Fini les longues attentes au téléphone. Trouvez un médecin disponible et réservez votre créneau en quelques secondes, directement depuis VitaPass. Votre dossier est automatiquement partagé avec le praticien — il arrive préparé, vous gagnez du temps." data-ar="انتهى زمن الانتظار الطويل على الهاتف. ابحث عن طبيب متاح واحجز موعدك في ثوانٍ معدودة مباشرة من VitaPass. ملفك يُشارك تلقائياً مع الطبيب — يأتي مستعداً وأنت توفر الوقت.">Fini les longues attentes au téléphone. Trouvez un médecin disponible et réservez votre créneau en quelques secondes, directement depuis VitaPass. Votre dossier est automatiquement partagé avec le praticien — il arrive préparé, vous gagnez du temps.</p>
       <div class="why-pill blue-pill"><span class="why-pill-dot"></span><span data-fr="Réservation instantanée" data-ar="حجز فوري">Réservation instantanée</span></div>
     </div>
     <div class="why-card">
       <div class="why-card-num"><span data-fr="03 · Digital" data-ar="٠٣ · رقمي">03 · Digital</span></div>
-      <div class="why-icon-wrap yellow-ico">📒</div>
+      <div class="why-icon-wrap yellow-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M9 7h6M9 11h4"/></svg></div>
       <div class="why-title" data-fr="Carnet de santé 100% digital" data-ar="دفتر الصحة ١٠٠٪ رقمي">Carnet de santé<br/>100% digital</div>
       <p class="why-desc" data-fr="Ordonnances, analyses, vaccins, antécédents — tout est dans votre téléphone. Fini les papiers perdus, les classeurs qui débordent. Votre historique médical complet, organisé, sécurisé, et accessible en un instant depuis n'importe où." data-ar="الوصفات، التحاليل، اللقاحات، السوابق المرضية — كل شيء في هاتفك. انتهت أيام الأوراق الضائعة والملفات المكدسة. سجلك الطبي الكامل، منظم، آمن، في متناول يدك من أي مكان.">Ordonnances, analyses, vaccins, antécédents — tout est dans votre téléphone. Fini les papiers perdus, les classeurs qui débordent. Votre historique médical complet, organisé, sécurisé, et accessible en un instant depuis n'importe où.</p>
       <div class="why-pill yellow-pill"><span class="why-pill-dot"></span><span data-fr="Zéro papier · Tout digitalisé" data-ar="بدون أوراق · كل شيء رقمي">Zéro papier · Tout digitalisé</span></div>
@@ -245,12 +281,12 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
   <div class="sec-badge"><span data-fr="Fonctionnalités" data-ar="المميزات">Fonctionnalités</span></div>
   <h2><span data-fr="Tout ce dont vous " data-ar="كل ما تحتاجه ">Tout ce dont vous </span><span class="green" data-fr="avez besoin" data-ar="في مكان واحد">avez besoin</span></h2>
   <div class="feat-grid">
-    <div class="feat"><div class="feat-ico">🆘</div><div class="feat-t" data-fr="QR Pass Urgence" data-ar="رمز QR للطوارئ">QR Pass Urgence</div><p class="feat-d" data-fr="Un QR code unique contenant vos informations vitales — groupe sanguin, allergies, contact d'urgence — accessible instantanément par les secours." data-ar="رمز QR فريد يحتوي على معلوماتك الحيوية — فصيلة الدم، الحساسيات، جهة الاتصال في حالات الطوارئ — يمكن للمسعفين الوصول إليه فوراً.">Un QR code unique contenant vos informations vitales — groupe sanguin, allergies, contact d'urgence — accessible instantanément par les secours.</p></div>
-    <div class="feat"><div class="feat-ico">📋</div><div class="feat-t" data-fr="Dossier médical complet" data-ar="ملف طبي شامل">Dossier médical complet</div><p class="feat-d" data-fr="Médicaments, antécédents, allergies, vaccins, documents médicaux — tout en un seul endroit, organisé et sécurisé." data-ar="الأدوية، السوابق المرضية، الحساسيات، اللقاحات، الوثائق الطبية — كل شيء في مكان واحد، منظم وآمن.">Médicaments, antécédents, allergies, vaccins, documents médicaux — tout en un seul endroit, organisé et sécurisé.</p></div>
-    <div class="feat"><div class="feat-ico">📊</div><div class="feat-t" data-fr="Suivi santé personnalisé" data-ar="متابعة صحية شخصية">Suivi santé personnalisé</div><p class="feat-d" data-fr="Surveillez votre glycémie, tension artérielle et poids avec des graphiques clairs. Idéal pour les patients diabétiques ou hypertendus." data-ar="راقب سكر الدم وضغط الدم والوزن بمخططات واضحة. مثالي لمرضى السكري وضغط الدم.">Surveillez votre glycémie, tension artérielle et poids avec des graphiques clairs. Idéal pour les patients diabétiques ou hypertendus.</p></div>
-    <div class="feat"><div class="feat-ico">👨‍⚕️</div><div class="feat-t" data-fr="Accès médecin sécurisé" data-ar="وصول طبي آمن">Accès médecin sécurisé</div><p class="feat-d" data-fr="Autorisez vos médecins à consulter votre dossier en un clic. Vous gardez le contrôle total — révoquez l'accès à tout moment." data-ar="اسمح لأطبائك بالاطلاع على ملفك بنقرة واحدة. أنت تتحكم في كل شيء — سحب الصلاحية في أي وقت.">Autorisez vos médecins à consulter votre dossier en un clic. Vous gardez le contrôle total — révoquez l'accès à tout moment.</p></div>
-    <div class="feat"><div class="feat-ico">📄</div><div class="feat-t" data-fr="Documents médicaux" data-ar="الوثائق الطبية">Documents médicaux</div><p class="feat-d" data-fr="Stockez vos ordonnances, analyses, radios et comptes rendus. Fini les papiers perdus — tout est dans votre poche." data-ar="احفظ وصفاتك، تحاليلك، صور الأشعة والتقارير. انتهى زمن الأوراق الضائعة — كل شيء في جيبك.">Stockez vos ordonnances, analyses, radios et comptes rendus. Fini les papiers perdus — tout est dans votre poche.</p></div>
-    <div class="feat"><div class="feat-ico">📱</div><div class="feat-t" data-fr="Application mobile PWA" data-ar="تطبيق موبايل PWA">Application mobile PWA</div><p class="feat-d" data-fr="Installez VitaPass sur votre téléphone comme une vraie app — iOS et Android — sans passer par un store." data-ar="ثبّت VitaPass على هاتفك كتطبيق حقيقي — iOS وأندرويد — دون الحاجة للمتجر.">Installez VitaPass sur votre téléphone comme une vraie app — iOS et Android — sans passer par un store.</p></div>
+    <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18v-6a5 5 0 0 1 10 0v6"/><path d="M5 21a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1Z"/><path d="M21 12h1M18.5 4.5 18 5M2 12h1M12 2v1M4.9 4.9l.7.7M12 12v6"/></svg></div><div class="feat-t" data-fr="QR Pass Urgence" data-ar="رمز QR للطوارئ">QR Pass Urgence</div><p class="feat-d" data-fr="Un QR code unique contenant vos informations vitales — groupe sanguin, allergies, contact d'urgence — accessible instantanément par les secours." data-ar="رمز QR فريد يحتوي على معلوماتك الحيوية — فصيلة الدم، الحساسيات، جهة الاتصال في حالات الطوارئ — يمكن للمسعفين الوصول إليه فوراً.">Un QR code unique contenant vos informations vitales — groupe sanguin, allergies, contact d'urgence — accessible instantanément par les secours.</p></div>
+    <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h6"/></svg></div><div class="feat-t" data-fr="Dossier médical complet" data-ar="ملف طبي شامل">Dossier médical complet</div><p class="feat-d" data-fr="Médicaments, antécédents, allergies, vaccins, documents médicaux — tout en un seul endroit, organisé et sécurisé." data-ar="الأدوية، السوابق المرضية، الحساسيات، اللقاحات، الوثائق الطبية — كل شيء في مكان واحد، منظم وآمن.">Médicaments, antécédents, allergies, vaccins, documents médicaux — tout en un seul endroit, organisé et sécurisé.</p></div>
+    <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="feat-t" data-fr="Suivi santé personnalisé" data-ar="متابعة صحية شخصية">Suivi santé personnalisé</div><p class="feat-d" data-fr="Surveillez votre glycémie, tension artérielle et poids avec des graphiques clairs. Idéal pour les patients diabétiques ou hypertendus." data-ar="راقب سكر الدم وضغط الدم والوزن بمخططات واضحة. مثالي لمرضى السكري وضغط الدم.">Surveillez votre glycémie, tension artérielle et poids avec des graphiques clairs. Idéal pour les patients diabétiques ou hypertendus.</p></div>
+    <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></div><div class="feat-t" data-fr="Accès médecin sécurisé" data-ar="وصول طبي آمن">Accès médecin sécurisé</div><p class="feat-d" data-fr="Autorisez vos médecins à consulter votre dossier en un clic. Vous gardez le contrôle total — révoquez l'accès à tout moment." data-ar="اسمح لأطبائك بالاطلاع على ملفك بنقرة واحدة. أنت تتحكم في كل شيء — سحب الصلاحية في أي وقت.">Autorisez vos médecins à consulter votre dossier en un clic. Vous gardez le contrôle total — révoquez l'accès à tout moment.</p></div>
+    <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h6M9 13h6M9 17h4"/></svg></div><div class="feat-t" data-fr="Documents médicaux" data-ar="الوثائق الطبية">Documents médicaux</div><p class="feat-d" data-fr="Stockez vos ordonnances, analyses, radios et comptes rendus. Fini les papiers perdus — tout est dans votre poche." data-ar="احفظ وصفاتك، تحاليلك، صور الأشعة والتقارير. انتهى زمن الأوراق الضائعة — كل شيء في جيبك.">Stockez vos ordonnances, analyses, radios et comptes rendus. Fini les papiers perdus — tout est dans votre poche.</p></div>
+    <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><div class="feat-t" data-fr="Application mobile PWA" data-ar="تطبيق موبايل PWA">Application mobile PWA</div><p class="feat-d" data-fr="Installez VitaPass sur votre téléphone comme une vraie app — iOS et Android — sans passer par un store." data-ar="ثبّت VitaPass على هاتفك كتطبيق حقيقي — iOS وأندرويد — دون الحاجة للمتجر.">Installez VitaPass sur votre téléphone comme une vraie app — iOS et Android — sans passer par un store.</p></div>
   </div>
 </section>
 
@@ -264,11 +300,11 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
       <p style="font-size:15px;color:var(--dim2);line-height:1.8" data-fr="VitaPass est construit sur une infrastructure de niveau entreprise. Vos données médicales ne sont jamais partagées sans votre accord explicite." data-ar="VitaPass مبني على بنية تحتية بمستوى المؤسسات. بياناتك الطبية لا تُشارك أبداً دون موافقتك الصريحة.">VitaPass est construit sur une infrastructure de niveau entreprise. Vos données médicales ne sont jamais partagées sans votre accord explicite.</p>
     </div>
     <div class="sec-items">
-      <div class="sec-item"><div class="si-ico">🔐</div><div><div class="si-t" data-fr="Chiffrement bout en bout" data-ar="تشفير من طرف إلى طرف">Chiffrement bout en bout</div><div class="si-s" data-fr="TLS 1.3 + chiffrement au repos" data-ar="TLS 1.3 + تشفير البيانات المخزنة">TLS 1.3 + chiffrement au repos</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
-      <div class="sec-item"><div class="si-ico">🛡️</div><div><div class="si-t" data-fr="Row Level Security" data-ar="أمان على مستوى الصفوف">Row Level Security</div><div class="si-s" data-fr="Vos données = vos données uniquement" data-ar="بياناتك = بياناتك فقط">Vos données = vos données uniquement</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
-      <div class="sec-item"><div class="si-ico">✅</div><div><div class="si-t" data-fr="Validation médecins" data-ar="التحقق من الأطباء">Validation médecins</div><div class="si-s" data-fr="Chaque médecin est vérifié manuellement" data-ar="كل طبيب يُتحقق منه يدوياً">Chaque médecin est vérifié manuellement</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
-      <div class="sec-item"><div class="si-ico">🔑</div><div><div class="si-t" data-fr="Contrôle d'accès total" data-ar="تحكم كامل في الوصول">Contrôle d'accès total</div><div class="si-s" data-fr="Vous choisissez qui voit quoi" data-ar="أنت تختار من يرى ماذا">Vous choisissez qui voit quoi</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
-      <div class="sec-item"><div class="si-ico">☁️</div><div><div class="si-t" data-fr="Infrastructure Supabase" data-ar="بنية Supabase التحتية">Infrastructure Supabase</div><div class="si-s" data-fr="Serveurs certifiés SOC 2 Type II" data-ar="خوادم معتمدة SOC 2 Type II">Serveurs certifiés SOC 2 Type II</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
+      <div class="sec-item"><div class="si-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><div class="si-t" data-fr="Chiffrement bout en bout" data-ar="تشفير من طرف إلى طرف">Chiffrement bout en bout</div><div class="si-s" data-fr="TLS 1.3 + chiffrement au repos" data-ar="TLS 1.3 + تشفير البيانات المخزنة">TLS 1.3 + chiffrement au repos</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
+      <div class="sec-item"><div class="si-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/></svg></div><div><div class="si-t" data-fr="Row Level Security" data-ar="أمان على مستوى الصفوف">Row Level Security</div><div class="si-s" data-fr="Vos données = vos données uniquement" data-ar="بياناتك = بياناتك فقط">Vos données = vos données uniquement</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
+      <div class="sec-item"><div class="si-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div><div><div class="si-t" data-fr="Validation médecins" data-ar="التحقق من الأطباء">Validation médecins</div><div class="si-s" data-fr="Chaque médecin est vérifié manuellement" data-ar="كل طبيب يُتحقق منه يدوياً">Chaque médecin est vérifié manuellement</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
+      <div class="sec-item"><div class="si-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></svg></div><div><div class="si-t" data-fr="Contrôle d'accès total" data-ar="تحكم كامل في الوصول">Contrôle d'accès total</div><div class="si-s" data-fr="Vous choisissez qui voit quoi" data-ar="أنت تختار من يرى ماذا">Vous choisissez qui voit quoi</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
+      <div class="sec-item"><div class="si-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 1 1 0 9Z"/></svg></div><div><div class="si-t" data-fr="Infrastructure Supabase" data-ar="بنية Supabase التحتية">Infrastructure Supabase</div><div class="si-s" data-fr="Serveurs certifiés SOC 2 Type II" data-ar="خوادم معتمدة SOC 2 Type II">Serveurs certifiés SOC 2 Type II</div></div><span class="si-badge" data-fr="Actif" data-ar="نشط">Actif</span></div>
     </div>
   </div>
 </div>
@@ -284,7 +320,7 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
     <a href="https://app.vitapass.app" class="btn-p" data-fr="Créer mon compte gratuit →" data-ar="إنشاء حسابي مجاناً ←">Créer mon compte gratuit →</a>
     <a href="mailto:contact@vitapass.app" class="btn-s" data-fr="Nous contacter" data-ar="تواصل معنا">Nous contacter</a>
   </div>
-  <p class="cta-note" data-fr="Gratuit · Sans publicité · Conçu à Oran 🇩🇿" data-ar="مجاني · بدون إعلانات · صُنع في وهران 🇩🇿">Gratuit · Sans publicité · Conçu à Oran 🇩🇿</p>
+  <p class="cta-note" data-fr="Gratuit · Sans publicité · Conçu à Oran" data-ar="مجاني · بدون إعلانات · صُنع في وهران">Gratuit · Sans publicité · Conçu à Oran</p>
 </div>
 
 <footer>
@@ -294,7 +330,7 @@ footer{padding:44px 48px;border-top:1px solid var(--border2);display:flex;align-
     <a href="mailto:contact@vitapass.app" class="ft-link" data-fr="Contact" data-ar="تواصل">Contact</a>
     <a href="mailto:contact@vitapass.app" class="ft-link">contact@vitapass.app</a>
   </div>
-  <div class="ft-copy" data-fr="© 2026 VitaPass · Algérie 🇩🇿" data-ar="© 2026 VitaPass · الجزائر 🇩🇿">© 2026 VitaPass · Algérie 🇩🇿</div>
+  <div class="ft-copy" data-fr="© 2026 VitaPass · Algérie" data-ar="© 2026 VitaPass · الجزائر">© 2026 VitaPass · Algérie</div>
 </footer>
 
 <script>
